@@ -352,6 +352,7 @@ def backup(filename=os.getcwd(), destination=None, profile="default", config=CON
 
     backup_data["metadata"] = dict(is_enc=bakthat_encryption,
                                    client=socket.gethostname())
+    stored_filename = os.path.join(os.path.dirname(kwargs.get("custom_filename", "")), stored_filename)
     backup_data["stored_filename"] = stored_filename
 
     access_key = storage_backend.conf.get("access_key")
@@ -520,7 +521,6 @@ def restore(filename, destination=None, profile="default", config=CONFIG_FILE, *
             password = getpass()
 
     log.info("Downloading...")
-
     download_kwargs = {}
     if kwargs.get("job_check"):
         download_kwargs["job_check"] = True
